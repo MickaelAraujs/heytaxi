@@ -20,7 +20,7 @@ export default class Cpf {
     }
 
     private isValidSize(cpf: string) {
-        return cpf.length !== this.MIN_DIGITS;
+        return cpf.length === this.MIN_DIGITS;
     }
 
     private allDigitsAreEqual(cpf: string) {

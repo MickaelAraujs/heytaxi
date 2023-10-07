@@ -1,29 +1,20 @@
 import Cpf from './cpf';
 
 describe('Cpf Test Suite', () => {
-    it('Should return true for valid cpf', () => {
-        const cpf = new Cpf('111.444.777-35');
-        expect(cpf).toBeTruthy();
+    it.each([
+        '111.444.777-35',
+        '11144477735'
+    ])('Should create a cpf with valid digits', (value: string) => {
+        const cpf = new Cpf(value);
+        expect(cpf.value).toBe(value);
     });
 
-    it('Should return true for valid cpf with only numbers', () => {
-        const cpf = new Cpf('11144477735');
-        expect(cpf).toBeTruthy();
-    });
-
-    it('Should return false if not numbers was provided', () => {
-        expect(() => new Cpf('Invalid Cpf')).toThrow(new Error('Invalid Cpf'));
-    });
-
-    it('Should return false if all digits are equal', () => {
-        expect(() => new Cpf('111.111.111-11')).toThrow(new Error('Invalid Cpf'));
-    });
-
-    it('Should return false if cpf is incomplete', () => {
-        expect(() => new Cpf('111.111.111')).toThrow(new Error('Invalid Cpf'));
-    });
-
-    it('Should return false if cpf is incomplete with numbers only', () => {
-        expect(() => new Cpf('111111111')).toThrow(new Error('Invalid Cpf'));
+    it.each([
+        'Invalid Cpf',
+        '111.111.111-11',
+        '111.111.111',
+        '111111111'
+    ])('Should throw error if cpf is invalid', (value: string) => {
+        expect(() => new Cpf(value)).toThrow(new Error('Invalid Cpf'));
     });
 });
