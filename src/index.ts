@@ -43,12 +43,12 @@ app.post('/api/drivers', async (request: Request, response: Response) => {
             document,
             car_plate
         ) VALUES (
-            '${driverId}',
-            '${name}',
-            '${email}',
-            '${cpf.value}',
-            '${car_plate}'
-        );`);
+            $1,
+            $2,
+            $3,
+            $4,
+            $5
+        );`, [driverId, name, email, cpf.value, car_plate]);
     
         return response.status(200).json({
             driver_id: driverId,
@@ -76,11 +76,11 @@ app.post('/api/passengers', async (request: Request, response: Response) => {
             email,
             document
         ) VALUES (
-            '${passenger_id}',
-            '${name}',
-            '${email}',
-            '${cpf.value}'
-        );`);
+            $1,
+            $2,
+            $3,
+            $4
+        );`, [passenger_id, name, email, cpf.value]);
     
         return response.status(200).json({
             passenger_id,
